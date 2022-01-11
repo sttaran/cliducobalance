@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 	"unicode/utf8"
 )
@@ -57,12 +59,18 @@ type Result struct {
 }
 
 func main() {
-	args := os.Args[1:]
-	user := args[0]
+	log.Println("Enter your DUCO username: ")
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("-> ")
+	name, _ := reader.ReadString('\n')
+	// convert CRLF to LF
+	name = strings.Replace(name, "\n", "", -1)
+	log.Println("Ok, connection...")
+
 	var balance float64
 	for {
 		time.Sleep(4 * time.Second)
-		resp, err := http.Get(URL + user + QUERY)
+		resp, err := http.Get(URL + name + QUERY)
 		if err != nil {
 			log.Println(err.Error())
 		}
