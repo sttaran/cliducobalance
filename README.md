@@ -15,6 +15,6 @@
 
 Just run ducoincliwalet.exe
 
-Введите свое на DUCO
+Введите свое имя на DUCO
 
 Готово
