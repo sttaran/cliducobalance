@@ -59,6 +59,16 @@ type Result struct {
 }
 
 func main() {
+	checkBalance()
+}
+
+func checkBalance() {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Println("Recovered :", r)
+			checkBalance()
+		}
+	}()
 	log.Println("Enter your DUCO username: ")
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("-> ")
