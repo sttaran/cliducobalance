@@ -74,7 +74,7 @@ func checkBalance() {
 	fmt.Print("-> ")
 	name, _ := reader.ReadString('\n')
 	// convert CRLF to LF
-	name = strings.Replace(name, "\n", "", -1)
+	name = strings.TrimSpace(name)
 	log.Println("Ok, connection...")
 
 	var balance float64
@@ -104,9 +104,9 @@ func checkBalance() {
 		if balance < result.Result.Balance.Balance {
 			diff := result.Result.Balance.Balance - balance
 			balance = result.Result.Balance.Balance
-			fmt.Printf("%v Balance + %f, Current -> %f\n", string(r), diff, balance)
+			log.Printf("%v Balance + %f, Current -> %f\n", string(r), diff, balance)
 		} else {
-			fmt.Printf("%v no changes \n", string(r1))
+			log.Printf("%v no changes \n", string(r1))
 		}
 	}
 }
